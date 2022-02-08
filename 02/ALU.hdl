@@ -161,5 +161,15 @@ CHIP ALU {
 
     // if (no == 1) set out = !out   // bitwise not
     // in Mux, if sel=0, then a is chosen
-    Mux16(a=almostFinalOut, b=almostFinalOutNot, sel=no, out=out);
+    Mux16(a=almostFinalOut, b=almostFinalOutNot, sel=no, out=out,
+          // alias to finalOut so we can use it to calculate zr
+          out[0..7]=finalOutLower, out[8..15]=finalOutHigher,
+          // the highest bit will be 1 if negative 
+          out[15]=ng);
+
+    // calculate zr
+    Or8Way(in=finalOutLower, out=lowerIsZero);
+    Or8Way(in=finalOutHigher, out=higherIsZero);
+    Or(a=lowerIsZero, b=higherIsZero, out=notZr);
+    Not(in=notZr, out=zr);
 }
