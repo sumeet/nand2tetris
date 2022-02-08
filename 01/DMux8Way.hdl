@@ -16,5 +16,14 @@ CHIP DMux8Way {
     OUT a, b, c, d, e, f, g, h;
 
     PARTS:
-    // Put your code here:
+    And(a=aCandidate, b=selLower, out=a);
+    DMux4Way(a=aCandidate, b=b, c=c, d=d, in=in, sel[0]=selLower0, sel[1]=selLower1);
+    And(a=selLower, b=sel[0], out=selLower0);
+    And(a=selLower, b=sel[1], out=selLower1);
+    Not(in=sel[2], out=selLower);
+
+    And(a=sel[2], b=sel[0], out=selHigher0);
+    And(a=sel[2], b=sel[1], out=selHigher1);
+    DMux4Way(sel[0]=selHigher0, sel[1]=selHigher1, in=in, a=eCandidate, b=f, c=g, d=h);
+    And(a=eCandidate, b=sel[2], out=e);
 }
