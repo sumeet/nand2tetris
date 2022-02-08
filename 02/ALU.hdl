@@ -42,73 +42,77 @@ CHIP ALU {
         ng; // 1 if (out < 0),  0 otherwise
 
     PARTS:
-    // compute outX
-    Xor(a=nx, b=x[0], out=negX0);
-    Xor(a=nx, b=x[1], out=negX1);
-    Xor(a=nx, b=x[2], out=negX2);
-    Xor(a=nx, b=x[3], out=negX3);
-    Xor(a=nx, b=x[4], out=negX4);
-    Xor(a=nx, b=x[5], out=negX5);
-    Xor(a=nx, b=x[6], out=negX6);
-    Xor(a=nx, b=x[7], out=negX7);
-    Xor(a=nx, b=x[8], out=negX8);
-    Xor(a=nx, b=x[9], out=negX9);
-    Xor(a=nx, b=x[10], out=negX10);
-    Xor(a=nx, b=x[11], out=negX11);
-    Xor(a=nx, b=x[12], out=negX12);
-    Xor(a=nx, b=x[13], out=negX13);
-    Xor(a=nx, b=x[14], out=negX14);
-    Xor(a=nx, b=x[15], out=negX15);
-    DMux(in=negX0, sel=zx, a=outX0);
-    DMux(in=negX1, sel=zx, a=outX1);
-    DMux(in=negX2, sel=zx, a=outX2);
-    DMux(in=negX3, sel=zx, a=outX3);
-    DMux(in=negX4, sel=zx, a=outX4);
-    DMux(in=negX5, sel=zx, a=outX5);
-    DMux(in=negX6, sel=zx, a=outX6);
-    DMux(in=negX7, sel=zx, a=outX7);
-    DMux(in=negX8, sel=zx, a=outX8);
-    DMux(in=negX9, sel=zx, a=outX9);
-    DMux(in=negX10, sel=zx, a=outX10);
-    DMux(in=negX11, sel=zx, a=outX11);
-    DMux(in=negX12, sel=zx, a=outX12);
-    DMux(in=negX13, sel=zx, a=outX13);
-    DMux(in=negX14, sel=zx, a=outX14);
-    DMux(in=negX15, sel=zx, a=outX15);
+    // first zero X
+    DMux(in=x[0], sel=zx, a=zeroX0);
+    DMux(in=x[1], sel=zx, a=zeroX1);
+    DMux(in=x[2], sel=zx, a=zeroX2);
+    DMux(in=x[3], sel=zx, a=zeroX3);
+    DMux(in=x[4], sel=zx, a=zeroX4);
+    DMux(in=x[5], sel=zx, a=zeroX5);
+    DMux(in=x[6], sel=zx, a=zeroX6);
+    DMux(in=x[7], sel=zx, a=zeroX7);
+    DMux(in=x[8], sel=zx, a=zeroX8);
+    DMux(in=x[9], sel=zx, a=zeroX9);
+    DMux(in=x[10], sel=zx, a=zeroX10);
+    DMux(in=x[11], sel=zx, a=zeroX11);
+    DMux(in=x[12], sel=zx, a=zeroX12);
+    DMux(in=x[13], sel=zx, a=zeroX13);
+    DMux(in=x[14], sel=zx, a=zeroX14);
+    DMux(in=x[15], sel=zx, a=zeroX15);
+    
+    // then negate X
+    Xor(a=nx, b=zeroX0, out=outX0);
+    Xor(a=nx, b=zeroX1, out=outX1);
+    Xor(a=nx, b=zeroX2, out=outX2);
+    Xor(a=nx, b=zeroX3, out=outX3);
+    Xor(a=nx, b=zeroX4, out=outX4);
+    Xor(a=nx, b=zeroX5, out=outX5);
+    Xor(a=nx, b=zeroX6, out=outX6);
+    Xor(a=nx, b=zeroX7, out=outX7);
+    Xor(a=nx, b=zeroX8, out=outX8);
+    Xor(a=nx, b=zeroX9, out=outX9);
+    Xor(a=nx, b=zeroX10, out=outX10);
+    Xor(a=nx, b=zeroX11, out=outX11);
+    Xor(a=nx, b=zeroX12, out=outX12);
+    Xor(a=nx, b=zeroX13, out=outX13);
+    Xor(a=nx, b=zeroX14, out=outX14);
+    Xor(a=nx, b=zeroX15, out=outX15);
 
-    // compute outY
-    Xor(a=ny, b=y[0], out=negY0);
-    Xor(a=ny, b=y[1], out=negY1);
-    Xor(a=ny, b=y[2], out=negY2);
-    Xor(a=ny, b=y[3], out=negY3);
-    Xor(a=ny, b=y[4], out=negY4);
-    Xor(a=ny, b=y[5], out=negY5);
-    Xor(a=ny, b=y[6], out=negY6);
-    Xor(a=ny, b=y[7], out=negY7);
-    Xor(a=ny, b=y[8], out=negY8);
-    Xor(a=ny, b=y[9], out=negY9);
-    Xor(a=ny, b=y[10], out=negY10);
-    Xor(a=ny, b=y[11], out=negY11);
-    Xor(a=ny, b=y[12], out=negY12);
-    Xor(a=ny, b=y[13], out=negY13);
-    Xor(a=ny, b=y[14], out=negY14);
-    Xor(a=ny, b=y[15], out=negY15);
-    DMux(in=negY0, sel=zy, a=outY0);
-    DMux(in=negY1, sel=zy, a=outY1);
-    DMux(in=negY2, sel=zy, a=outY2);
-    DMux(in=negY3, sel=zy, a=outY3);
-    DMux(in=negY4, sel=zy, a=outY4);
-    DMux(in=negY5, sel=zy, a=outY5);
-    DMux(in=negY6, sel=zy, a=outY6);
-    DMux(in=negY7, sel=zy, a=outY7);
-    DMux(in=negY8, sel=zy, a=outY8);
-    DMux(in=negY9, sel=zy, a=outY9);
-    DMux(in=negY10, sel=zy, a=outY10);
-    DMux(in=negY11, sel=zy, a=outY11);
-    DMux(in=negY12, sel=zy, a=outY12);
-    DMux(in=negY13, sel=zy, a=outY13);
-    DMux(in=negY14, sel=zy, a=outY14);
-    DMux(in=negY15, sel=zy, a=outY15);
+    // first zero Y
+    DMux(in=y[0], sel=zy, a=zeroY0);
+    DMux(in=y[1], sel=zy, a=zeroY1);
+    DMux(in=y[2], sel=zy, a=zeroY2);
+    DMux(in=y[3], sel=zy, a=zeroY3);
+    DMux(in=y[4], sel=zy, a=zeroY4);
+    DMux(in=y[5], sel=zy, a=zeroY5);
+    DMux(in=y[6], sel=zy, a=zeroY6);
+    DMux(in=y[7], sel=zy, a=zeroY7);
+    DMux(in=y[8], sel=zy, a=zeroY8);
+    DMux(in=y[9], sel=zy, a=zeroY9);
+    DMux(in=y[10], sel=zy, a=zeroY10);
+    DMux(in=y[11], sel=zy, a=zeroY11);
+    DMux(in=y[12], sel=zy, a=zeroY12);
+    DMux(in=y[13], sel=zy, a=zeroY13);
+    DMux(in=y[14], sel=zy, a=zeroY14);
+    DMux(in=y[15], sel=zy, a=zeroY15);
+    
+    // then negate X
+    Xor(a=ny, b=zeroY0, out=outY0);
+    Xor(a=ny, b=zeroY1, out=outY1);
+    Xor(a=ny, b=zeroY2, out=outY2);
+    Xor(a=ny, b=zeroY3, out=outY3);
+    Xor(a=ny, b=zeroY4, out=outY4);
+    Xor(a=ny, b=zeroY5, out=outY5);
+    Xor(a=ny, b=zeroY6, out=outY6);
+    Xor(a=ny, b=zeroY7, out=outY7);
+    Xor(a=ny, b=zeroY8, out=outY8);
+    Xor(a=ny, b=zeroY9, out=outY9);
+    Xor(a=ny, b=zeroY10, out=outY10);
+    Xor(a=ny, b=zeroY11, out=outY11);
+    Xor(a=ny, b=zeroY12, out=outY12);
+    Xor(a=ny, b=zeroY13, out=outY13);
+    Xor(a=ny, b=zeroY14, out=outY14);
+    Xor(a=ny, b=zeroY15, out=outY15);
 
     // compute x + y
     Add16(a[0]=outX0, b[0]=outY0,
