@@ -42,5 +42,120 @@ CHIP ALU {
         ng; // 1 if (out < 0),  0 otherwise
 
     PARTS:
-   // Put you code here:
+    // compute outX
+    Xor(a=nx, b=x[0], out=negX0);
+    Xor(a=nx, b=x[1], out=negX1);
+    Xor(a=nx, b=x[2], out=negX2);
+    Xor(a=nx, b=x[3], out=negX3);
+    Xor(a=nx, b=x[4], out=negX4);
+    Xor(a=nx, b=x[5], out=negX5);
+    Xor(a=nx, b=x[6], out=negX6);
+    Xor(a=nx, b=x[7], out=negX7);
+    Xor(a=nx, b=x[8], out=negX8);
+    Xor(a=nx, b=x[9], out=negX9);
+    Xor(a=nx, b=x[10], out=negX10);
+    Xor(a=nx, b=x[11], out=negX11);
+    Xor(a=nx, b=x[12], out=negX12);
+    Xor(a=nx, b=x[13], out=negX13);
+    Xor(a=nx, b=x[14], out=negX14);
+    Xor(a=nx, b=x[15], out=negX15);
+    DMux(in=negX0, sel=zx, a=outX0);
+    DMux(in=negX1, sel=zx, a=outX1);
+    DMux(in=negX2, sel=zx, a=outX2);
+    DMux(in=negX3, sel=zx, a=outX3);
+    DMux(in=negX4, sel=zx, a=outX4);
+    DMux(in=negX5, sel=zx, a=outX5);
+    DMux(in=negX6, sel=zx, a=outX6);
+    DMux(in=negX7, sel=zx, a=outX7);
+    DMux(in=negX8, sel=zx, a=outX8);
+    DMux(in=negX9, sel=zx, a=outX9);
+    DMux(in=negX10, sel=zx, a=outX10);
+    DMux(in=negX11, sel=zx, a=outX11);
+    DMux(in=negX12, sel=zx, a=outX12);
+    DMux(in=negX13, sel=zx, a=outX13);
+    DMux(in=negX14, sel=zx, a=outX14);
+    DMux(in=negX15, sel=zx, a=outX15);
+
+    // compute outY
+    Xor(a=ny, b=y[0], out=negY0);
+    Xor(a=ny, b=y[1], out=negY1);
+    Xor(a=ny, b=y[2], out=negY2);
+    Xor(a=ny, b=y[3], out=negY3);
+    Xor(a=ny, b=y[4], out=negY4);
+    Xor(a=ny, b=y[5], out=negY5);
+    Xor(a=ny, b=y[6], out=negY6);
+    Xor(a=ny, b=y[7], out=negY7);
+    Xor(a=ny, b=y[8], out=negY8);
+    Xor(a=ny, b=y[9], out=negY9);
+    Xor(a=ny, b=y[10], out=negY10);
+    Xor(a=ny, b=y[11], out=negY11);
+    Xor(a=ny, b=y[12], out=negY12);
+    Xor(a=ny, b=y[13], out=negY13);
+    Xor(a=ny, b=y[14], out=negY14);
+    Xor(a=ny, b=y[15], out=negY15);
+    DMux(in=negY0, sel=zy, a=outY0);
+    DMux(in=negY1, sel=zy, a=outY1);
+    DMux(in=negY2, sel=zy, a=outY2);
+    DMux(in=negY3, sel=zy, a=outY3);
+    DMux(in=negY4, sel=zy, a=outY4);
+    DMux(in=negY5, sel=zy, a=outY5);
+    DMux(in=negY6, sel=zy, a=outY6);
+    DMux(in=negY7, sel=zy, a=outY7);
+    DMux(in=negY8, sel=zy, a=outY8);
+    DMux(in=negY9, sel=zy, a=outY9);
+    DMux(in=negY10, sel=zy, a=outY10);
+    DMux(in=negY11, sel=zy, a=outY11);
+    DMux(in=negY12, sel=zy, a=outY12);
+    DMux(in=negY13, sel=zy, a=outY13);
+    DMux(in=negY14, sel=zy, a=outY14);
+    DMux(in=negY15, sel=zy, a=outY15);
+
+    // compute x + y
+    Add16(a[0]=outX0, b[0]=outY0,
+          a[1]=outX1, b[1]=outY1,
+          a[2]=outX2, b[2]=outY2,
+          a[3]=outX3, b[3]=outY3,
+          a[4]=outX4, b[4]=outY4,
+          a[5]=outX5, b[5]=outY5,
+          a[6]=outX6, b[6]=outY6,
+          a[7]=outX7, b[7]=outY7,
+          a[8]=outX8, b[8]=outY8,
+          a[9]=outX9, b[9]=outY9,
+          a[10]=outX10, b[10]=outY10,
+          a[11]=outX11, b[11]=outY11,
+          a[12]=outX12, b[12]=outY12,
+          a[13]=outX13, b[13]=outY13,
+          a[14]=outX14, b[14]=outY14,
+          a[15]=outX15, b[15]=outY15,
+          out=added);
+
+    // compute x & y
+    And16(a[0]=outX0, b[0]=outY0,
+          a[1]=outX1, b[1]=outY1,
+          a[2]=outX2, b[2]=outY2,
+          a[3]=outX3, b[3]=outY3,
+          a[4]=outX4, b[4]=outY4,
+          a[5]=outX5, b[5]=outY5,
+          a[6]=outX6, b[6]=outY6,
+          a[7]=outX7, b[7]=outY7,
+          a[8]=outX8, b[8]=outY8,
+          a[9]=outX9, b[9]=outY9,
+          a[10]=outX10, b[10]=outY10,
+          a[11]=outX11, b[11]=outY11,
+          a[12]=outX12, b[12]=outY12,
+          a[13]=outX13, b[13]=outY13,
+          a[14]=outX14, b[14]=outY14,
+          a[15]=outX15, b[15]=outY15,
+          out=bitwiseAnd);
+
+    // if (f == 1)  set out = x + y  // integer 2's complement addition
+    // if (f == 0)  set out = x & y  // bitwise and
+    // in Mux, if sel=0, then a is chosen
+    Mux16(a=bitwiseAnd, b=added, sel=f, out=almostFinalOut);
+
+    Not16(in=almostFinalOut, out=almostFinalOutNot);
+
+    // if (no == 1) set out = !out   // bitwise not
+    // in Mux, if sel=0, then a is chosen
+    Mux16(a=almostFinalOut, b=almostFinalOutNot, sel=no, out=out);
 }
