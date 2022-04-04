@@ -39,7 +39,10 @@ CHIP CPU {
         pc[15];          // address of next instruction
 
     PARTS:
-    PC(in=jmpTo, load=isJmp, reset=reset, inc=true, out[1..15]=pc);
+    // hawoefjawo
+    Mux8Way16(a=pcIncr, b=aRegOut, c=aRegOut, d=aRegOut, e=aRegOut, f=aRegOut, g=aRegOut, h=aRegOut);
+
+    PC(in=aRegOut, load=isJmp, reset=reset, inc=true, out[1..15]=pcIncr);
     Not(in=inM[15], out=isAInstruction);
 
     Or(a=true, b=c[3], out=writeM);
